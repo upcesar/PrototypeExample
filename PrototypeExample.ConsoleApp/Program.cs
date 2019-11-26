@@ -1,6 +1,9 @@
 ﻿using PrototypeExample.ConsoleApp.People;
+using PrototypeExample.ConsoleApp.Shapes;
 using System;
+using System.Drawing;
 using System.Threading;
+using Rectangle = PrototypeExample.ConsoleApp.Shapes.Rectangle;
 
 namespace PrototypeExample.ConsoleApp
 {
@@ -11,6 +14,19 @@ namespace PrototypeExample.ConsoleApp
             ThreadSafeSingleton();
             NaiveSingleton();
             PrototypePerson();
+            PrototypeShapes();
+        }
+
+        private static void PrototypeShapes()
+        {
+            var circle = new Circle(50, 10, 30);
+            circle.FillColor(Color.Blue);
+            
+            var rectangle = new Rectangle(10,20, 50, 50);
+            rectangle.FillColor(Color.Red);
+
+            Console.WriteLine(circle);
+            Console.WriteLine(rectangle);
         }
 
         private static void NaiveSingleton()
