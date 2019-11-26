@@ -1,6 +1,7 @@
 ﻿using PrototypeExample.ConsoleApp.People;
 using PrototypeExample.ConsoleApp.Shapes;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using Rectangle = PrototypeExample.ConsoleApp.Shapes.Rectangle;
@@ -27,6 +28,21 @@ namespace PrototypeExample.ConsoleApp
 
             Console.WriteLine(circle);
             Console.WriteLine(rectangle);
+
+            var shapeList = new List<Shape> { circle, rectangle };
+
+            Console.WriteLine(new string('*', 50));
+            shapeList.ForEach(original => {
+                var shallow = original.ShallowCopy();
+                var deep = original.DeepCopy();
+
+                original.FillColor(Color.Green);
+
+                Console.WriteLine("Original: {0}\nShallowCopy: {1}\n", original, shallow);
+                Console.WriteLine(new string('*', 50));
+                Console.WriteLine("Original: {0}\nDeepCopy: {1}\n", original, deep);
+            
+            });
         }
 
         private static void NaiveSingleton()
