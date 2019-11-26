@@ -16,17 +16,21 @@ namespace PrototypeExample.ConsoleApp
         private static void NaiveSingleton()
         {
             Person p1 = Person.GetInstance();
-
-            p1.Age = 42;
-            p1.BirthDate = Convert.ToDateTime("1977-01-01");
-            p1.Name = "Jack Daniels";
-            p1.IdInfo = new IdInfo(666);
+            SetupValues(p1);
 
             Person p2 = Person.GetInstance();
 
             Console.WriteLine("\nNahive Singleton - Comparing instances");
             Console.WriteLine("   p1 comparing instance with p5 (Singleton)");
             DisplaySingleton(p1, p2);
+        }
+
+        private static void SetupValues(Person p1)
+        {
+            p1.Age = 42;
+            p1.BirthDate = Convert.ToDateTime("1977-01-01");
+            p1.Name = "Jack Daniels";
+            p1.IdInfo = new IdInfo(666);
         }
 
         private static void ThreadSafeSingleton()
