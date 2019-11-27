@@ -1,5 +1,4 @@
-﻿using PrototypeExample.ConsoleApp;
-using PrototypeExample.ConsoleApp.People;
+﻿using PrototypeExample.ConsoleApp.People;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,7 +27,7 @@ namespace PrototypeExample.UnitTests
             DeepCopy();
 
             this.SetupInThread().Wait();
-            Person1.IdInfo.IdNumber = NewId;
+            Person1.document.Value = NewId;
         }
 
         private void DeepCopy() => PersonDeepClone = Person1.DeepCopy();
@@ -60,7 +59,7 @@ namespace PrototypeExample.UnitTests
             Person1.Age = 42;
             Person1.BirthDate = Convert.ToDateTime("1977-01-01");
             Person1.Name = "Jack Daniels";
-            Person1.IdInfo = new IdInfo(OriginalId);
+            Person1.document = new Document(OriginalId);
         }
 
 

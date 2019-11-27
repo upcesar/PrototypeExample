@@ -10,7 +10,7 @@ namespace PrototypeExample.ConsoleApp.People
         public int Age;
         public DateTime BirthDate;
         public string Name;
-        public IdInfo IdInfo;
+        public Document document;
 
         #endregion
 
@@ -35,7 +35,7 @@ namespace PrototypeExample.ConsoleApp.People
 
         protected override void PreserveAttributes(Person clone)
         {
-            clone.IdInfo = new IdInfo(IdInfo.IdNumber);
+            clone.document = new Document(document.Value);
             clone.Name = Name;
         }
     }

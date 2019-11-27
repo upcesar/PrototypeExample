@@ -22,10 +22,10 @@ namespace PrototypeExample.UnitTests
         
         [Fact]
         public void ReferenceChangedShallowCloneTest()
-            => Assert.Equal(fixture.NewId, fixture.PersonShallowClone.IdInfo.IdNumber);
+            => Assert.Equal(fixture.NewId, fixture.PersonShallowClone.document.Value);
         
         [Fact]
         public void ReferenceKeptDeepCloneTest()
-            => Assert.Equal(fixture.OriginalId, fixture.PersonDeepClone.IdInfo.IdNumber);
+            => Assert.Equal(fixture.OriginalId, fixture.PersonDeepClone.document.Value);
     }
 }

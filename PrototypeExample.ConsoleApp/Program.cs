@@ -1,4 +1,4 @@
-﻿using PrototypeExample.ConsoleApp.People;
+using PrototypeExample.ConsoleApp.People;
 using PrototypeExample.ConsoleApp.Shapes;
 using System;
 using System.Collections.Generic;
@@ -62,7 +62,7 @@ namespace PrototypeExample.ConsoleApp
             p1.Age = 42;
             p1.BirthDate = Convert.ToDateTime("1977-01-01");
             p1.Name = "Jack Daniels";
-            p1.IdInfo = new IdInfo(666);
+            p1.document = new Document(666);
         }
 
         private static void ThreadSafeSingleton()
@@ -75,7 +75,7 @@ namespace PrototypeExample.ConsoleApp
                 tp1.BirthDate = Convert.ToDateTime("1940-03-10");
                 tp1.Age = new DateTime(DateTime.Now.Date.Subtract(tp1.BirthDate).Ticks).Year - 1;
                 tp1.Name = "Chuck Norris";
-                tp1.IdInfo = new IdInfo(6969);
+                tp1.document = new Document(6969);
 
                 DisplayPersonValues(tp1);
 
@@ -87,7 +87,7 @@ namespace PrototypeExample.ConsoleApp
                 tp2.BirthDate = Convert.ToDateTime("1940-11-27");
                 tp2.Age = new DateTime(DateTime.Now.Date.Subtract(tp2.BirthDate).Ticks).Year - 1;
                 tp2.Name = "Bruce Lee";
-                tp2.IdInfo = new IdInfo(74156);
+                tp2.document = new Document(74156);
 
                 DisplayPersonValues(tp2);
             });            
@@ -123,7 +123,7 @@ namespace PrototypeExample.ConsoleApp
             p1.Age = 32;
             p1.BirthDate = Convert.ToDateTime("1900-01-01");
             p1.Name = "Frank";
-            p1.IdInfo.IdNumber = 7878;
+            p1.document.Value = 7878;
             Console.WriteLine("\nValues of p1, p2 and p3 after changes to p1:");
             Console.WriteLine("   p1 instance values: ");
             DisplayPersonValues(p1);
@@ -141,7 +141,7 @@ namespace PrototypeExample.ConsoleApp
 
             Console.WriteLine(
                 "      ID#: {0:d}",
-                p.IdInfo.IdNumber);
+                p.document.Value);
         }
 
         private static void DisplaySingleton<T>(T obj1, T obj2)
