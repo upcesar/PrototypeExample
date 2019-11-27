@@ -8,9 +8,13 @@ namespace PrototypeExample.ConsoleApp.Shapes
 {
     public abstract class Shape : Prototype<Shape>, IShape
     {
+        public string Name => this.GetType().Name;
+        public Color Color { get; private set; }
         public int X { get; private set; }
         public int Y { get; private set; }
-        public Color Color { get; private set; }
+        public Tag Tag { get; set; }
+        
+        public string Notes;
 
         public Shape()
         {
@@ -28,9 +32,11 @@ namespace PrototypeExample.ConsoleApp.Shapes
 
         protected override void PreserveAttributes(Shape clone)
         {
+            clone.Tag = new Tag(this.Tag.Notes);
             clone.Color = this.Color;
             clone.X = this.X;
             clone.Y = this.Y;
+            clone.Notes = string.Concat(this.Notes);
         }
 
         public override string ToString()

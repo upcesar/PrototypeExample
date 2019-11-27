@@ -9,7 +9,6 @@ namespace PrototypeExample.ConsoleApp.Shapes
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-
         public Rectangle() => this.SetDimension(100, 100);
         public Rectangle(int x, int y, int width, int height)
         {

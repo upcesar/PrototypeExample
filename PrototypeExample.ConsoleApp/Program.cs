@@ -1,4 +1,4 @@
-using PrototypeExample.ConsoleApp.People;
+﻿using PrototypeExample.ConsoleApp.People;
 using PrototypeExample.ConsoleApp.Shapes;
 using System;
 using System.Collections.Generic;
@@ -22,9 +22,13 @@ namespace PrototypeExample.ConsoleApp
         {
             var circle = new Circle(50, 10, 30);
             circle.FillColor(Color.Blue);
-            
-            var rectangle = new Rectangle(10,20, 50, 50);
+            circle.Tag = new Tag($"This is the original {circle.Name}");
+            circle.Notes = "Note 1";
+
+            var rectangle = new Rectangle(10, 20, 50, 50);
             rectangle.FillColor(Color.Red);
+            rectangle.Tag = new Tag($"This is the original {rectangle.Name}");
+            rectangle.Notes = "Note 2";
 
             Console.WriteLine(circle);
             Console.WriteLine(rectangle);
@@ -32,16 +36,36 @@ namespace PrototypeExample.ConsoleApp
             var shapeList = new List<Shape> { circle, rectangle };
 
             Console.WriteLine(new string('*', 50));
-            shapeList.ForEach(original => {
+            shapeList.ForEach(original =>
+            {
                 var shallow = original.ShallowCopy();
                 var deep = original.DeepCopy();
 
-                original.FillColor(Color.Green);
+                Console.WriteLine("{0} position before moving: ({1},{2})", original.Name, original.X, deep.Y);
+                Console.WriteLine("---Notes before changing---");
+                Console.WriteLine("Original: {0}\tShallowCopy: {1}", original.Tag, shallow.Tag);
+                Console.WriteLine("Original: {0}\tDeepCopy: {1}", original.Tag, deep.Tag);
 
-                Console.WriteLine("Original: {0}\nShallowCopy: {1}\n", original, shallow);
+                original.Move(original.X + 5, original.Y + 5);
+                original.FillColor(Color.Black);
+                original.Tag.Notes = $"A Shallow Copy of {original.Name} was created";
+                original.Notes = original.Tag.Notes;
+
+                Console.WriteLine("{0} position after moving: ({1},{2})", original.Name, original.X, deep.Y);
+
+                Console.WriteLine("{0} Color", original.Name);
+                Console.WriteLine("Original: {0}\nShallowCopy: {1}", original.Color, shallow.Color);
+                Console.WriteLine("Original: {0}\nDeepCopy: {1}", original.Color, deep.Color);
+
+                Console.WriteLine("---Notes after changing---");
+                Console.WriteLine("Original: {0}\nShallowCopy: {1}", original.Tag, shallow.Tag);
+                Console.WriteLine("Original: {0}\nDeepCopy: {1}", original.Tag, deep.Tag);
+
+
                 Console.WriteLine(new string('*', 50));
-                Console.WriteLine("Original: {0}\nDeepCopy: {1}\n", original, deep);
-            
+                Console.WriteLine("Original: {0}\nShallowCopy: {1}\nDeepCopy: {2}", original.Notes, shallow.Notes, deep.Notes);
+                Console.WriteLine(new string('*', 50));
+
             });
         }
 
@@ -80,7 +104,7 @@ namespace PrototypeExample.ConsoleApp
                 DisplayPersonValues(tp1);
 
             });
-            
+
             Thread process2 = new Thread(() =>
             {
                 var tp2 = Person.GetInstanceThreadSafe();
@@ -90,11 +114,11 @@ namespace PrototypeExample.ConsoleApp
                 tp2.document = new Document(74156);
 
                 DisplayPersonValues(tp2);
-            });            
+            });
 
             process1.Start();
             process2.Start();
-            
+
             process1.Join();
             process2.Join();
         }
@@ -104,8 +128,8 @@ namespace PrototypeExample.ConsoleApp
             Person p1 = Person.GetInstance();
 
             // Perform a shallow copy of p1 and assign it to p2.
-            Person p2 = p1.ShallowCopy();            
-            
+            Person p2 = p1.ShallowCopy();
+
             // Make a deep copy of p1 and assign it to p3.
             Person p3 = p1.DeepCopy();
 
